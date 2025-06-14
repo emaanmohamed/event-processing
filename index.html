@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>WebSocket Kafka Test</h2>
+<input id="msg" type="text" placeholder="Type message..." />
+<button onclick="send()">Send</button>
+<script>
+    const ws = new WebSocket("ws://localhost:8080/ws");
+
+    ws.onopen = () => console.log("Connected");
+    ws.onmessage = e => console.log("Server:", e.data);
+    ws.onerror = e => console.error("WebSocket error:", e);
+
+    function send() {
+        const input = document.getElementById("msg");
+        ws.send(input.value);
+        input.value = '';
+    }
+</script>
+</body>
+</html>
